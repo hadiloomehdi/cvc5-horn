@@ -20,13 +20,14 @@ class ParsData {
 
     private fun parseBody(body:String): Body{
         return body.split("∧").let {
-            val fi  = it.last()
+            val fi  = it.last().trim()
 
             val rels = mutableListOf<Predicate>()
             it.forEach { cluse ->
                 if (cluse.contains("(") and !cluse.contains("~") ) {
-                    val par = cluse.subSequence(cluse.indexOf("(") + 1, cluse.indexOf(")")).toString()
-                    rels.add( Predicate(name = cluse.substringBefore("("), par))
+                    val cleanCluse = cluse.replace("\\s+".toRegex(), "")
+                    val par = cleanCluse.subSequence(cleanCluse.indexOf("(") + 1, cleanCluse.indexOf(")")).toString()
+                    rels.add( Predicate(name = cleanCluse.substringBefore("("), par))
 
                 }
             }
@@ -47,7 +48,7 @@ class ParsData {
                 val a = data.split("=>").let { splitted ->
                     val head = parseHead(splitted[1].replace("\\s+".toRegex(), ""))
 
-                    val body = parseBody(splitted[0].replace("\\s+".toRegex(), ""))
+                    val body = parseBody(splitted[0])
 
 
                     horns.add(Horn(head, body ))
