@@ -63,7 +63,7 @@ public class SimpleVC {
 
     public static void main(String[] args) {
         try {
-            File myObj = new File("/home/mahdi/Desktop/synthesis/project/untitled/src/main/java/f.txt");
+            File myObj = new File("/home/mahdi/Desktop/synthesis/project/cvc5-horn/src/main/java/f.txt");
             Scanner myReader = new Scanner(myObj);
             while (myReader.hasNextLine()) {
                 String data = myReader.nextLine();
